@@ -1,0 +1,1 @@
+docker run --name db-postgres -p 5433:5432 -e POSTGRES_PASSWORD=my-weak-password -d postgres

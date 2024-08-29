@@ -5,16 +5,33 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
 import { Repository } from 'typeorm';
 import { error } from 'console';
+import { StateTask } from 'src/state_tasks/entities/state_task.entity';
 
 @Injectable()
 export class TasksService {
   constructor(
     @InjectRepository(Task)
     private readonly taskRepository: Repository<Task>,
+
+    @InjectRepository(StateTask)
+    private readonly statetaskRepository: Repository<StateTask>,
   ) {}
 
-  async create(createTaskDto: CreateTaskDto) {
-    const task = this.taskRepository.create(createTaskDto);
+  async create(createtaskDto: CreateTaskDto) {
+    const estado = await this.statetaskRepository.findOneBy({
+      nombre: createtaskDto.estado,
+    });
+
+    if (!estado) {
+      throw new BadRequestException('Estado no encontrado');
+    }
+
+    const task = this.taskRepository.create({
+      nombre: createtaskDto.nombre,
+      asignadoa: createtaskDto.asignadoa,
+      descripcion: createtaskDto.descripcion,
+      estado,
+    });
     return await this.taskRepository.save(task);
   }
 

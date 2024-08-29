@@ -1,7 +1,9 @@
+import { StateTask } from "src/state_tasks/entities/state_task.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    ManyToOne,
     PrimaryGeneratedColumn,
   } from "typeorm";
   
@@ -15,9 +17,12 @@ import {
   
     @Column()
     asignadoa: string;
-  
-    @Column()
-    estado: string;
+
+
+    @ManyToOne(() => StateTask, (estado) => estado.id, {
+      eager: true
+    })
+    estado: StateTask
 
     @Column()
     descripcion: string;

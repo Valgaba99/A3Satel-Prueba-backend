@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { StateTasksModule } from './state_tasks/state_tasks.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), TasksModule,
+    //ConfigModule.forRoot({ isGlobal: true }), TasksModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -16,6 +17,8 @@ import { ConfigModule } from '@nestjs/config';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    TasksModule,
+    StateTasksModule,
   ],
   controllers: [],
   providers: [],

@@ -1,15 +1,13 @@
-version: '3.7'
 services:
   postgres:
     image: postgres:13
-    container_name: postgres_db
+    restart: always
+    container_name: db-postgres-task
     ports:
-      - '5432:5432'
+      - '5433:5432'
     environment:
-      POSTGRES_DB: task_db
-      POSTGRES_USER: task_user
-      POSTGRES_PASSWORD: task_password
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: my-weak-password 
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-volumes:
-  postgres_data:
+      - ./data:/var/lib/postgresql/data

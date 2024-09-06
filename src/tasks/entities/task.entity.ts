@@ -1,6 +1,7 @@
 import { StateTask } from "src/state_tasks/entities/state_task.entity";
 import {
     Column,
+    CreateDateColumn,
     DeleteDateColumn,
     Entity,
     ManyToOne,
@@ -24,9 +25,13 @@ import {
     })
     estado: StateTask
 
+
     @Column()
     descripcion: string;
   
+    @CreateDateColumn()
+    created: Date
+
     @DeleteDateColumn()
     deletedAt: Date;
   }

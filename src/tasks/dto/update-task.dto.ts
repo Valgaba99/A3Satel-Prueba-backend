@@ -1,5 +1,4 @@
 import { IsOptional, IsString, MinLength } from "class-validator";
-import { StateTask } from "src/state_tasks/entities/state_task.entity";
 
 
 export class UpdateTaskDto {
@@ -17,7 +16,7 @@ export class UpdateTaskDto {
   @IsString()
   @IsOptional()
   @MinLength(3)
-  estado: StateTask;
+  estado: string;
 
   @IsString()
   @IsOptional()

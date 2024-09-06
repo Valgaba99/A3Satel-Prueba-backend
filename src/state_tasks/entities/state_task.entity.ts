@@ -16,5 +16,5 @@ export class StateTask {
   nombre: string;
 
   @OneToMany(() => Task, (task) => task.estado)
-  tasks: Task[]
+  tasks: Task[];
 }

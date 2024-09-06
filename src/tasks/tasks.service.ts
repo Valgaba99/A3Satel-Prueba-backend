@@ -44,7 +44,23 @@ export class TasksService {
   }
 
   async update(id: number, updateTaskDto: UpdateTaskDto) {
-    return await this.taskRepository.update(id, updateTaskDto);
+    const estado = await this.statetaskRepository.findOneBy({
+      nombre: updateTaskDto.estado,
+    });
+  
+    if (!estado) {
+      throw new BadRequestException('Estado no encontrado');
+    }
+  
+    const updateData = {
+      nombre: updateTaskDto.nombre,
+      asignadoa: updateTaskDto.asignadoa,
+      descripcion: updateTaskDto.descripcion,
+      estado,
+    };
+  
+    await this.taskRepository.update(id, updateData);
+    return this.taskRepository.findOneBy({ id });
   }
 
   async remove(id: number) {

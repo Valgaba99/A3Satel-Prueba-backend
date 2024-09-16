@@ -4,7 +4,6 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
 import { Repository } from 'typeorm';
-import { error } from 'console';
 import { StateTask } from 'src/state_tasks/entities/state_task.entity';
 
 @Injectable()

@@ -19,12 +19,10 @@ import {
     @Column()
     asignadoa: string;
 
-
     @ManyToOne(() => StateTask, (estado) => estado.id, {
       eager: true
     })
     estado: StateTask
-
 
     @Column()
     descripcion: string;
